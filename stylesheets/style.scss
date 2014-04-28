@@ -1,9 +1,9 @@
 /*
-	Theme Name: HTML5 Blank
-	Theme URI: http://html5blank.com
-	Description: HTML5 Blank WordPress Theme
-	Version: 1.4.2
-	Author: Todd Motto (@toddmotto)
+	Theme Name: kristenpelou
+	Theme URI: http://kristenpelou.com
+	Description: Theme based on HTML5 Blank WordPress Theme
+	Version: 1.0.0
+	Author: Jerome Lachaud (@jeromelachaud)
 	Author URI: http://toddmotto.com
 	Tags: Blank, HTML5, CSS3
  	License: MIT
@@ -11,11 +11,10 @@
 */
 
 /*------------------------------------*\
-    Import a
+    Import
 \*------------------------------------*/
 @import 'lib/normalize';
 @import 'lib/colors/colors';
-
 
 /*------------------------------------*\
     MAIN
@@ -57,8 +56,8 @@ img {
 	max-width:100%;
 	vertical-align:bottom;
 }
-a {
-	color:#444;
+a:link, a:visited{
+	color:$black;
 	text-decoration:none;
 }
 a:hover {
@@ -76,6 +75,9 @@ input:focus {
 	border:1px solid #04A4CC;
 }
 
+ul {
+	padding: 0;
+}
 /*------------------------------------*\
     STRUCTURE
 \*------------------------------------*/
@@ -98,30 +100,89 @@ input:focus {
 .logo-img {
 	
 }
+
+/* breadcrumb */
+ul#breadcrumbs {
+	list-style:none;
+	margin:0;
+	overflow:hidden;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+ul#breadcrumbs li, 
+ul#breadcrumbs li h3 {
+	float:left;
+	margin: 0 0 0 2px;
+	font-size:1.17rem;
+}
+
+ul#breadcrumbs li:nth-child(1) h3 {
+	margin: 0;
+}
+
+ul#breadcrumbs li a:before, 
+ul#breadcrumbs li h3:before {
+	content:"\005c";	 	
+	display: inline-table;
+	margin: 0 0.2rem 0 0;
+}
+
+
 /* nav */
 .nav {
-	
+	text-transform: uppercase;
 }
+.nav ul li {
+    list-style: none;
+	font-weight: 800;
+}
+
+.selectnav { display: none; }
+
+
 /* sidebar */
 .sidebar {
 	
 }
 /* footer */
 .footer {
+
+margin-top: 6rem;
 	
 }
+
+/*------------------------------------*\
+    GRID
+\*------------------------------------*/
+
 
 /*------------------------------------*\
     PAGES
 \*------------------------------------*/
 
 
-
 /*------------------------------------*\
     IMAGES
 \*------------------------------------*/
 
+/* GALLERY */
 
+.gallery-caption, .wp-caption .wp-caption-text {
+	font-size: 2.2rem;
+	line-height: 0;
+	margin: -4rem 0;
+	padding: 0 4px 5px;
+	color: #fff;
+	position: relative;
+	text-transform: uppercase;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+div[id*='gallery-'] dl {
+	float: left;
+}
 
 /*------------------------------------*\
 	TYPOGRAPHY
@@ -138,45 +199,159 @@ input:focus {
     font-style:normal;
 }
 
+h1, h2 {
+	text-transform: uppercase;
+}
+
+article p {
+	font-size: 1.5rem;
+	color: $black;
+	font-weight: 400;
+}
+
 /*------------------------------------*\
     RESPONSIVE
 \*------------------------------------*/
+@media only screen and (max-width:320px) {
+	.js #header-navigation { display: none; }
+  	.js .selectnav { display: block; }
+}
 
 @media only screen and (min-width:320px) {
 	
 	body {
-		background-color: green;
+		background-color: $white;
+	}
+	
+	.logo a h1, 
+	.logo a h2 {
+		margin:0;
+	}
+
+	.logo a h2 {
+		margin-top: -1.05rem;
+	}
+
+	.nav ul li {
+		&.home-menu {
+		    font-size: 5rem;
+		    line-height: 0.79em;
+		}
+		&.header-menu {
+		    display: inline;
+		}
+	}
+
+	div[id*='gallery-'] dl {
+		&.grid {
+			width: 220px;
+			height: 285px;
+			margin: 1rem 0;
+			overflow: hidden;
+		}
+		&.col {
+			float: left;  
+			margin: 0 0 11rem 0;
+		} 
 	}
 }
-@media only screen and (min-width:480px) {
+
+@media only screen and (min-width:478px) {
 
 	body {
-	background-color: red;
+	background-color: $red;
 	}
 
-}
-@media only screen and (min-width:768px) {
-
-	body {
-		background-color: blue;
+	.logo a h1{
+		font-size: 6rem;
+		letter-spacing: -0.0625em;
+		margin-bottom: -3.2rem;
 	}
 
+	.logo > a > h2 {
+	    font-size: 5rem;
+   		margin-top: -3.05rem;
+	}
+	.nav ul > li.header-menu {
+	    font-size: 3rem;
+	    margin-left: 1rem;
+	}
 
+	.nav ul > li.header-menu:first-child {
+	    margin-left: 0;
+	}	
+
+	.nav ul > li.home-menu {
+	    font-size: 8rem;
+	}
+	
+	ul#breadcrumbs > li, 
+	ul#breadcrumbs > li > h3 {
+		font-size: 2rem;
+	}
+
+	div[id*='gallery-'] {
+		min-width: 500px;
+		max-width: 670px;
+			& dl.grid:nth-child(even) {
+		   		margin-left:2rem;	
+			}
+	}
 }
-@media only screen and (min-width:1024px) {
+
+@media only screen and (min-width:1124px) {
 
 	body {
 		background-color: pink;
 	}
+	
+	#home-navigation {
+		margin-top: 0;
+		padding-top: 15px;
+	}
 
+	ul#breadcrumbs > li, 
+	ul#breadcrumbs > li > h3{
+		font-size: 3rem;
+	}
 
+	
+	.nav ul > li.header-menu {
+	    font-size: 3rem;
+	    margin-left: 1rem;
+	}	
+
+	ul#header-navigation {
+	    position: relative;
+	    float: right;
+	    margin-top: -52px;
+	    margin-right:100px;
+	}
+
+	div[id*='gallery-'] {
+		max-width: 1215px;
+			& dl.grid:nth-child(4n-1),
+			& dl.grid:nth-child(8n-1) {
+				margin-left: 2rem;			
+			}
+	}
 }
-@media only screen and (min-width:1140px) {
 
-}
-@media only screen and (min-width:1280px) {
+@media only screen and (min-width:1237px) {
 
+	body {
+		background-color: $purple;
+	}
+
+	div[id*='gallery-'] {
+		min-width: 1239px;
+			& dl.grid:nth-child(5n){
+    			margin-left: 2rem!important;
+	   		}
+	}
 }
+
+
 @media only screen and (-webkit-min-device-pixel-ratio:1.5),
 	   only screen and (min-resolution:144dpi) {
 
@@ -266,13 +441,14 @@ a img.aligncenter {
 	padding:0;
 	width:auto;
 }
-.wp-caption .wp-caption-text,
-.gallery-caption {
-	font-size:11px;
-	line-height:17px;
-	margin:0;
-	padding:0 4px 5px;
-}
+// .wp-caption .wp-caption-text,
+// .gallery-caption {
+// 	font-size:11px;
+// 	line-height:17px;
+// 	margin:0;
+// 	padding:0 4px 5px;
+// }
+
 .sticky {
 	
 }
