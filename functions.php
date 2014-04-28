@@ -63,16 +63,16 @@ if (function_exists('add_theme_support'))
 \*------------------------------------*/
 
 // HTML5 Blank navigation
-function html5blank_nav()
+function html5blank_nav_home()
 {
 	wp_nav_menu(
 	array(
-		'theme_location'  => 'header-menu',
+		'theme_location'  => 'home-menu',
 		'menu'            => '',
 		'container'       => 'div',
 		'container_class' => 'menu-{menu slug}-container',
 		'container_id'    => '',
-		'menu_class'      => 'menu',
+		'menu_class'      => 'home-class',
 		'menu_id'         => '',
 		'echo'            => true,
 		'fallback_cb'     => 'wp_page_menu',
@@ -80,11 +80,35 @@ function html5blank_nav()
 		'after'           => '',
 		'link_before'     => '',
 		'link_after'      => '',
-		'items_wrap'      => '<ul>%3$s</ul>',
+		'items_wrap'      => '<ul id="home-navigation">%3$s</ul>',
 		'depth'           => 0,
 		'walker'          => ''
 		)
 	);
+}
+
+function html5blank_nav_header()
+{
+    wp_nav_menu(
+    array(
+        'theme_location'  => 'header-menu',
+        'menu'            => '',
+        'container'       => 'div',
+        'container_class' => 'menu-{menu slug}-container',
+        'container_id'    => '',
+        'menu_class'      => 'header-class',
+        'menu_id'         => '',
+        'echo'            => true,
+        'fallback_cb'     => 'wp_page_menu',
+        'before'          => '',
+        'after'           => '',
+        'link_before'     => '',
+        'link_after'      => '',
+        'items_wrap'      => '<ul id="header-navigation">%3$s</ul>',
+        'depth'           => 0,
+        'walker'          => ''
+        )
+    );
 }
 
 // Load HTML5 Blank scripts (header.php)
@@ -132,7 +156,7 @@ function register_html5_menu()
     register_nav_menus(array( // Using array to specify more menus if needed
         'header-menu' => __('Header Menu', 'html5blank'), // Main Navigation
         'sidebar-menu' => __('Sidebar Menu', 'html5blank'), // Sidebar Navigation
-        'extra-menu' => __('Extra Menu', 'html5blank') // Extra Navigation if needed (duplicate as many as you need!)
+        'home-menu' => __('Home Menu', 'html5blank') // Home Navigation (if needed duplicate as many as you need!)
     ));
 }
 
@@ -375,7 +399,7 @@ add_filter('widget_text', 'do_shortcode'); // Allow shortcodes in Dynamic Sideba
 add_filter('widget_text', 'shortcode_unautop'); // Remove <p> tags in Dynamic Sidebars (better!)
 add_filter('wp_nav_menu_args', 'my_wp_nav_menu_args'); // Remove surrounding <div> from WP Navigation
 // add_filter('nav_menu_css_class', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> injected classes (Commented out by default)
-// add_filter('nav_menu_item_id', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> injected ID (Commented out by default)
+ add_filter('nav_menu_item_id', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> injected ID (Commented out by default)
 // add_filter('page_css_class', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> Page ID's (Commented out by default)
 add_filter('the_category', 'remove_category_rel_from_category_list'); // Remove invalid rel attribute
 add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in Excerpt (Manual Excerpts only)
@@ -453,5 +477,107 @@ function html5_shortcode_demo_2($atts, $content = null) // Demo Heading H2 short
 {
     return '<h2>' . $content . '</h2>';
 }
+
+/*------------------------------------*\
+    MY FUNCTIONS:
+\*------------------------------------*/
+/*------------------------------------*\
+    Breadcrum trail
+\*------------------------------------*/
+
+function the_breadcrumb() {
+    global $post;
+    echo '<ul id="breadcrumbs">';
+    if (!is_front_page()) {
+        // echo '<li><a href="';
+        // echo get_option('home');
+        // echo '">';
+        // echo 'Home';
+        // echo '</a></li><li></li>';
+        if (is_category() || is_single()) {
+            echo '<li>';
+            the_category(' </li><li></li><li> ');
+            if (is_single()) {
+                echo '</li><li></li><li>';
+                the_title();
+                echo '</li>';
+            }
+        } elseif (is_page()) {
+            if($post->post_parent){
+                $anc = get_post_ancestors( $post->ID );
+                $title = get_the_title();
+                foreach ( $anc as $ancestor ) {
+                    $output = '<li><a href="'.get_permalink($ancestor).'"title="'.get_the_title($ancestor).'">'.get_the_title($ancestor).'</a></li><li></li>';
+                }
+                echo $output;
+                echo '<li><h3 title="'.$title.'">'.$title.'</h3><li>';
+            } else {
+                echo '<li><h3>';
+                echo the_title();
+                echo '</li></h3>';
+            }
+        }
+    }
+    elseif (is_tag()) {single_tag_title();}
+    elseif (is_day()) {echo"<li>Archive for "; the_time('F jS, Y'); echo'</li>';}
+    elseif (is_month()) {echo"<li>Archive for "; the_time('F, Y'); echo'</li>';}
+    elseif (is_year()) {echo"<li>Archive for "; the_time('Y'); echo'</li>';}
+    elseif (is_author()) {echo"<li>Author Archive"; echo'</li>';}
+    elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {echo "<li>Blog Archives"; echo'</li>';}
+    elseif (is_search()) {echo"<li>Search Results"; echo'</li>';}
+    echo '</ul>';
+}
+
+/*------------------------------------*\
+    Sitemap HTML
+\*------------------------------------*/
+function spp_html_sitemap() {
+ $spp_sitemap = '';
+ $published_posts = wp_count_posts('post');
+ // $spp_sitemap .= '<h4 id="sitemap-posts-h4">Here is a list of of my '.$published_posts->publish.' published posts</h4>';
+ 
+ $args = array(
+  'exclude' => '1', /* ID of categories to be excluded, separated by comma */
+  'post_type' => 'post',
+  'post_status' => 'publish'
+  );
+    $cats = get_categories($args);
+    foreach ($cats as $cat) :
+    $spp_sitemap .= '<div>';
+    $spp_sitemap .= '<h3>Category: <a href="'.get_category_link( $cat->term_id ).'">'.$cat->cat_name.'</a></h3>';
+    $spp_sitemap .= '<ul>';
+ 
+  query_posts('posts_per_page=-1&cat='.$cat->cat_ID);
+  while(have_posts()) {
+    the_post();
+    $category = get_the_category();
+    /* Only display a post link once, even if it's in multiple categories */
+    if ($category[0]->cat_ID == $cat->cat_ID) {
+        $spp_sitemap .= '<li class="cat-list"><a href="'.get_permalink().'" rel="bookmark">'.get_the_title().'</a></li>';
+ 
+    }
+  }
+  $spp_sitemap .= '</ul>';
+  $spp_sitemap .= '</div>';
+ 
+  endforeach;
+ 
+  $pages_args = array(
+    'exclude' => '', /* ID of pages to be excluded, separated by comma */
+    'post_type' => 'page',
+    'post_status' => 'publish'
+    ); 
+ 
+  // $spp_sitemap .= '<h3>Pages</h3>';
+  $spp_sitemap .= '<ul class="pages-list">';
+  $pages = get_pages($pages_args); 
+  foreach ( $pages as $page ) :
+  $spp_sitemap .= '<li class="pages-list"><a href="'.get_page_link( $page->ID ).'" rel="bookmark">'.$page->post_title.'</a></li>';
+  endforeach;
+  $spp_sitemap .= '<ul>';
+ 
+ return $spp_sitemap;
+}
+add_shortcode( 'spp-sitemap','spp_html_sitemap' );
 
 ?>
