@@ -573,12 +573,27 @@ ul#breadcrumbs li a:before, ul#breadcrumbs li h3:before {
 .footer {
   margin-top: 6rem; }
 
+div.addthis_toolbox {
+  margin-left: -8px; }
+
+.copyright {
+  font-size: 1.2rem;
+  font-weight: bold; }
+
 /*------------------------------------*\
     GRID
 \*------------------------------------*/
 /*------------------------------------*\
     PAGES
 \*------------------------------------*/
+/* Sitemap HTML */
+ul.pages-list {
+  padding-left: 2px;
+  list-style-type: none;
+  font-size: 2em;
+  text-transform: uppercase;
+  font-weight: 500; }
+
 /*------------------------------------*\
     IMAGES
 \*------------------------------------*/
@@ -593,6 +608,14 @@ ul#breadcrumbs li a:before, ul#breadcrumbs li h3:before {
   text-transform: uppercase;
   font-weight: bold;
   cursor: pointer; }
+
+div[id*='gallery-'] dl.col > .gallery-caption, .wp-caption .wp-caption-text {
+  color: #111;
+  padding-top: 66px;
+  margin-bottom: -61px;
+  font-size: 1.7rem;
+  margin-left: 0;
+  padding-left: 0; }
 
 div[id*='gallery-'] dl {
   float: left; }
@@ -641,13 +664,15 @@ article p {
     height: 285px;
     margin: 1rem 0;
     overflow: hidden; }
+  div[id*='gallery-'] dl.grid-logos {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px; }
   div[id*='gallery-'] dl.col {
     float: left;
     margin: 0 0 11rem 0; } }
 
-@media only screen and (min-width: 478px) {
-  body {
-    background-color: #FF4136; }
+@media only screen and (min-width: 665px) {
   .logo a h1 {
     font-size: 6rem;
     letter-spacing: -0.0625em;
@@ -670,30 +695,29 @@ article p {
     div[id*='gallery-'] dl.grid:nth-child(even) {
       margin-left: 2rem; } }
 
-@media only screen and (min-width: 1124px) {
-  body {
-    background-color: pink; }
+@media only screen and (min-width: 1230px) {
   #home-navigation {
     margin-top: 0;
     padding-top: 15px; }
   ul#breadcrumbs > li, ul#breadcrumbs > li > h3 {
     font-size: 3rem; }
   .nav ul > li.header-menu {
-    font-size: 3rem;
+    font-size: 2.6rem;
     margin-left: 1rem; }
   ul#header-navigation {
     position: relative;
     float: right;
-    margin-top: -52px;
-    margin-right: 65px; }
+    margin-top: -42px;
+    margin-right: 100px; }
   div[id*='gallery-'] {
     max-width: 1215px; }
     div[id*='gallery-'] dl.grid:nth-child(4n-1), div[id*='gallery-'] dl.grid:nth-child(8n-1) {
       margin-left: 2rem; } }
 
 @media only screen and (min-width: 1237px) {
-  body {
-    background-color: #B10DC9; }
+  .nav ul > li.header-menu {
+    font-size: 2.6rem;
+    margin-left: 1rem; }
   div[id*='gallery-'] {
     min-width: 1239px; }
     div[id*='gallery-'] dl.grid:nth-child(5n) {
