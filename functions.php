@@ -80,7 +80,7 @@ function html5blank_nav_home()
 		'after'           => '',
 		'link_before'     => '',
 		'link_after'      => '',
-		'items_wrap'      => '<ul id="home-navigation">%3$s</ul>',
+		'items_wrap'      => '<ul class="home-navigation">%3$s</ul>',
 		'depth'           => 0,
 		'walker'          => ''
 		)
@@ -104,7 +104,7 @@ function html5blank_nav_header()
         'after'           => '',
         'link_before'     => '',
         'link_after'      => '',
-        'items_wrap'      => '<ul id="header-navigation">%3$s</ul>',
+        'items_wrap'      => '<ul class="header-navigation">%3$s</ul>',
         'depth'           => 0,
         'walker'          => ''
         )
@@ -487,7 +487,7 @@ function html5_shortcode_demo_2($atts, $content = null) // Demo Heading H2 short
 
 function the_breadcrumb() {
     global $post;
-    echo '<ul id="breadcrumbs">';
+    echo '<ul class="breadcrumbs">';
     if (!is_front_page()) {
         // echo '<li><a href="';
         // echo get_option('home');
