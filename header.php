@@ -5,9 +5,6 @@
 		<title><?php wp_title(''); ?><?php if(wp_title('', false)) { echo ' :'; } ?> <?php bloginfo('name'); ?></title>
 
 		<link href="//www.google-analytics.com" rel="dns-prefetch">
-		<!-- <link href="<?php echo get_template_directory_uri(); ?>/img/icons/favicon.ico" rel="shortcut icon">
-        <link href="<?php echo get_template_directory_uri(); ?>/img/icons/touch.png" rel="apple-touch-icon-precomposed"> -->
-
         <link rel="apple-touch-icon" sizes="57x57" href="<?php echo get_template_directory_uri(); ?>/img/favicons/apple-touch-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="114x114" href="<?php echo get_template_directory_uri(); ?>/img/favicons/apple-touch-icon-114x114.png">
 		<link rel="apple-touch-icon" sizes="72x72" href="<?php echo get_template_directory_uri(); ?>/img/favicons/apple-touch-icon-72x72.png">
@@ -37,11 +34,6 @@
             tests: {}
         });
         </script>
-
-<!-- 
-<link rel="stylesheet" href="http://www.pictogalerie.fr/css/module.css" />
-<script src="http://www.pictogalerie.fr/module/1b6b01e220fc6621f3c596c4d86492af8ca65bab/script.js"></script>
--->
 
 	</head>
 	<body <?php body_class(); ?>>
