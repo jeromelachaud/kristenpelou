@@ -7,8 +7,8 @@
 						<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
 						<a class="addthis_button_facebook"><img src="<?php echo get_template_directory_uri(); ?>/img/icons/facebook.png" width="24px" height="24px"></a>
 						<a class="addthis_button_twitter"><img src="<?php echo get_template_directory_uri(); ?>/img/icons/twitter_bird.png" width="24px" height="24px"></a>
+						<a class="addthis_button_tumblr"><img src="<?php echo get_template_directory_uri(); ?>/img/icons/tumblr.png" width="24px" height="24px"></a>
 						<a class="addthis_button_pinterest_share"><img src="<?php echo get_template_directory_uri(); ?>/img/icons/pinterest.png" width="24px" height="24px"></a>
-						<a class="addthis_button_google_plusone_share"><img src="<?php echo get_template_directory_uri(); ?>/img/icons/github.png" width="24px" height="24px"></a>
 						<a class="addthis_button_compact"><img src="<?php echo get_template_directory_uri(); ?>/img/icons/share_this.png" width="24px" height="24px"></a>
 						</div>
 						<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
