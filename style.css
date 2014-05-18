@@ -615,7 +615,8 @@ dd {
 /* sidebar */
 /* footer */
 .footer {
-  margin-top: 6rem; }
+  margin-top: 6rem;
+  margin-bottom: 3rem; }
 
 div.addthis_toolbox {
   margin-left: -9px; }
@@ -642,6 +643,11 @@ ul.pages-list {
     IMAGES
 \*------------------------------------*/
 /* GALLERY */
+div[id*='gallery-'] .gallery-item {
+  width: auto !important; }
+div[id*='gallery-'] img {
+  border: none !important; }
+
 dd.gallery-caption {
   font-size: 2rem;
   width: 220px;
