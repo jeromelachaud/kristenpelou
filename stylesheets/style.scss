@@ -260,6 +260,10 @@ p.wp-caption-text {
 	margin-top: 2rem;
 }
 
+[class*="wp-image"] {
+    height: auto;
+    width: auto;
+}
 
 /*------------------------------------*\
 	TYPOGRAPHY
