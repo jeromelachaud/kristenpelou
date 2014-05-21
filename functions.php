@@ -301,6 +301,13 @@ function remove_thumbnail_dimensions( $html )
     return $html;
 }
 
+// Remove image width and height dimensions that prevent fluid images in the_thumbnail
+
+function remove_width_attribute( $html ) {
+   $html = preg_replace( '/(width|height)="\d*"\s/', "", $html );
+   return $html;
+}
+
 // Custom Gravatar in Settings > Discussion
 function html5blankgravatar ($avatar_defaults)
 {
@@ -408,7 +415,11 @@ add_filter('excerpt_more', 'html5_blank_view_article'); // Add 'View Article' bu
 add_filter('show_admin_bar', 'remove_admin_bar'); // Remove Admin bar
 add_filter('style_loader_tag', 'html5_style_remove'); // Remove 'text/css' from enqueued stylesheet
 add_filter('post_thumbnail_html', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to thumbnails
-add_filter('image_send_to_editor', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to post images
+add_filter( 'post_thumbnail_html', 'remove_width_attribute', 130 ); 
+
+// Remove width and height dynamic attributes to post images that WORKS! (http://css-tricks.com/snippets/wordpress/remove-width-and-height-attributes-from-inserted-images/)
+add_filter('image_send_to_editor', 'remove_thumbnail_dimensions', 50); // Remove width and height dynamic attributes to post images
+add_filter( 'image_send_to_editor', 'remove_width_attribute', 130 ); // Remove width and height dynamic attributes to post images 
 
 // Remove Filters
 remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altogether
