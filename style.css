@@ -654,11 +654,13 @@ dd.gallery-caption {
   width: 220px;
   color: #fff;
   margin-top: -6rem;
-  padding-left: 4rem;
+  padding-right: 0.2rem;
   position: relative;
   font-weight: 700;
   text-transform: uppercase;
-  height: 7rem; }
+  height: 7rem;
+  text-align: right;
+  line-height: 16px; }
 
 dl.col > .gallery-caption {
   color: #111;
@@ -685,7 +687,8 @@ p.wp-caption-text {
 
 [class*="wp-image"] {
   height: auto;
-  width: auto; }
+  width: auto;
+  clear: both; }
 
 /*------------------------------------*\
 	TYPOGRAPHY

@@ -225,12 +225,14 @@ dd.gallery-caption {
 	color: #fff;
 //	border: 1px red solid; 
 	margin-top: -6rem;
-	padding-left: 4rem;
+	padding-right: 0.2rem;
 	position: relative;
 	font-weight: 700;
 	text-transform: uppercase;
 	//overflow: hidden;
-	height:7rem
+	height:7rem;
+	text-align:right;
+	line-height: 16px;
 }
 
 dl.col > .gallery-caption {
@@ -263,6 +265,7 @@ p.wp-caption-text {
 [class*="wp-image"] {
     height: auto;
     width: auto;
+    clear: both;
 }
 
 /*------------------------------------*\
