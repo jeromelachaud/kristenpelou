@@ -626,6 +626,9 @@ div.addthis_toolbox {
   font-size: 1.2rem;
   font-weight: bold; }
 
+.comments {
+  clear: both; }
+
 /*------------------------------------*\
     GRID
 \*------------------------------------*/
